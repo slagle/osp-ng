@@ -1,0 +1,2 @@
+SCRIPTS_DIR=$(realpath $(dirname ${BASH_SOURCE[0]})/scripts)
+PATH=$PATH:${SCRIPTS_DIR}
