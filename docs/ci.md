@@ -1,27 +1,39 @@
 # CI
 
+***
+**Contents**
+
+* [OpenShift CI](#openshift-ci)
+* [Links](#links)
+* [CI Operator](#ci-operator)
+* [OpenShift Release Tooling](#openshift-release-tooling)
+* [Github PR Jobs](#github-pr-jobs)
+  * [pre-commit](#pre-commit)
+
+***
+
 ## OpenShift CI
 
-Openshift CI Docs https://docs.ci.openshift.org/docs/
-
-### Links
-
-Useful Links https://docs.ci.openshift.org/docs/getting-started/useful-links/
-Prow dashboard https://prow.ci.openshift.org/
+* OpenShift CI docs <https://docs.ci.openshift.org/docs/>
+* OpenShift CI useful links <https://docs.ci.openshift.org/docs/getting-started/useful-links/>
+* Prow dashboard <https://prow.ci.openshift.org/>
+* Prow docs <https://docs.prow.k8s.io/docs/overview/>
+* OWNERS docs <https://github.com/kubernetes/community/blob/master/contributors/guide/owners.md>
 
 ### CI Operator
 
-ci-operator docs https://docs.ci.openshift.org/docs/architecture/ci-operator/
-ci-operator reference https://steps.ci.openshift.org/ci-operator-reference
-ci-operator git https://github.com/openshift/ci-operator
-ci-operator onboarding https://github.com/openshift/ci-operator/blob/master/ONBOARD.md
+* ci-operator docs <https://docs.ci.openshift.org/docs/architecture/ci-operator/>
+* ci-operator reference <https://steps.ci.openshift.org/ci-operator-reference>
+* ci-operator git https://github.com/openshift/ci-operator
+* ci-operator onboarding <https://github.com/openshift/ci-operator/blob/master/ONBOARD.md>
 
 ### OpenShift Release Tooling
 
-https://github.com/openshift/release
-https://github.com/openshift/release/blob/master/ci-operator/config/openstack-k8s-operators/dataplane-operator/openstack-k8s-operators-dataplane-operator-main.yaml
-https://github.com/openshift/release/tree/master/ci-operator/step-registry/openstack-k8s-operators
+* <https://github.com/openshift/release>
+* <https://github.com/openshift/release/blob/master/ci-operator/config/openstack-k8s-operators/dataplane-operator/openstack-k8s-operators-dataplane-operator-main.yaml>
+* <https://github.com/openshift/release/tree/master/ci-operator/step-registry/openstack-k8s-operators>
 
+***
 
 ## Github PR jobs
 
@@ -30,7 +42,7 @@ https://github.com/openshift/release/tree/master/ci-operator/step-registry/opens
 pre-commit is "A framework for managing and maintaining multi-language
 pre-commit hooks."
 
-https://pre-commit.com/
+<https://pre-commit.com/>
 
 Configured with `.pre-commit-config.yaml` in the root of a git repo.
 
