@@ -1,2 +1,4 @@
 SCRIPTS_DIR=$(realpath $(dirname ${BASH_SOURCE[0]})/scripts)
+INSTALL_YAMLS="/home/jslagle/code/osp-ng/openstack-k8s-operators/install_yamls"
 PATH=$PATH:${SCRIPTS_DIR}
+PATH="/home/jslagle/.crc/bin/oc:$PATH"
