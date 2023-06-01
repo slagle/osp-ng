@@ -1,0 +1,2 @@
+export DATAPLANE_REPO=${DATAPLANE_REPO:-"https://github.com/slagle/dataplane-operator.git"}
+export DATAPLANE_BRANCH=${DATAPLANE_BRANCH:-"main"}
