@@ -1,6 +1,7 @@
 # CI
 
 ***
+
 **Contents**
 
 * [OpenShift CI](#openshift-ci)
@@ -11,6 +12,14 @@
   * [pre-commit](#pre-commit)
 
 ***
+
+## Commands/Comments
+
+To recheck rdoproject.org jobs (rdoproject.org/github-check) on GitHub PR's
+comment with:
+
+> recheck
+
 
 ## OpenShift CI
 
@@ -24,7 +33,7 @@
 
 * ci-operator docs <https://docs.ci.openshift.org/docs/architecture/ci-operator/>
 * ci-operator reference <https://steps.ci.openshift.org/ci-operator-reference>
-* ci-operator git https://github.com/openshift/ci-operator
+* ci-operator git <https://github.com/openshift/ci-operator>
 * ci-operator onboarding <https://github.com/openshift/ci-operator/blob/master/ONBOARD.md>
 
 ### OpenShift Release Tooling
@@ -48,3 +57,7 @@ Configured with `.pre-commit-config.yaml` in the root of a git repo.
 
 pre-commit supports hooks provided by other git repos. A repo providing hooks
 must contain a `.pre-commit-hooks.yaml` file in the root of the git repo.
+
+Run pre-commit (assuming installed with `pip install --user pre-commit`):
+
+    ~/.local/bin/pre-commit run -a
