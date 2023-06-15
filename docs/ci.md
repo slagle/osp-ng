@@ -35,6 +35,7 @@ comment with:
 * ci-operator reference <https://steps.ci.openshift.org/ci-operator-reference>
 * ci-operator git <https://github.com/openshift/ci-operator>
 * ci-operator onboarding <https://github.com/openshift/ci-operator/blob/master/ONBOARD.md>
+* ci-operator interacting with jobs <https://docs.ci.openshift.org/docs/how-tos/interact-with-running-jobs/>
 
 ### OpenShift Release Tooling
 
