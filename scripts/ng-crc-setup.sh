@@ -6,9 +6,10 @@ export INSTALL_YAMLS=${INSTALL_YAMLS:-"install_yamls"}
 export CPUS=${CPUS:-"16"}
 export MEMORY=${MEMORY:-"32768"}
 export DISK=${DISK:-"80"}
-export PULL_SECRET=${PULL_SECRET:-"~/pull-secret.json"}
 
-if [ ! -f ${PULL_SECRET} ]; then
+export PULL_SECRET=${PULL_SECRET:-${HOME}/pull-secret.json}
+
+if [ ! -f "${PULL_SECRET}" ]; then
     echo "Pull secret does not exist at ${PULL_SECRET}."
     echo "Set \${PULL_SECRET} to the correct path for the pull secret."
     exit 1
