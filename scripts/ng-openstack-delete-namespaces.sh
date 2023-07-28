@@ -20,3 +20,4 @@ delete_namespace() {
 
 delete_namespace openstack
 delete_namespace openstack-operators
+delete_namespace cert-manager-operator
