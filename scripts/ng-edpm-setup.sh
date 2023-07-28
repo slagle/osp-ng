@@ -16,9 +16,16 @@ fi
 pushd $INSTALL_YAMLS
 cd devsetup
 
-let idx=${NODES}-1
+# If let evaluates to 0, it returns 1, which would fail the script
+let idx=${NODES}-1 || :
+
 for n in $(seq 0 ${idx}); do
     EDPM_COMPUTE_SUFFIX=$n make edpm_compute
+done
+
+# wait for nodes to boot
+sleep 30
+for n in $(seq 0 ${idx}); do
     EDPM_COMPUTE_SUFFIX=$n make edpm_compute_repos
 done
 
