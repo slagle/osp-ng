@@ -15,6 +15,8 @@ pushd ${OPENSTACK_K8S_OPERATORS}/install_yamls
 
 if [ ${NODES} = "1" ]; then
     export DATAPLANE_SINGLE_NODE=true
+else
+    export DATAPLANE_SINGLE_NODE=false
 fi
 
 make edpm_deploy
