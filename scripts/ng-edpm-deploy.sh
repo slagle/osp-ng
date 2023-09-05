@@ -7,7 +7,7 @@ export OPENSTACK_K8S_OPERATORS=${OPENSTACK_K8S_OPERATORS:-"$(pwd)"}
 export SCRIPTS_DIR=$(dirname $(realpath $0))
 export DATAPLANE_CHRONY_NTP_SERVER=${DATAPLANE_CHRONY_NTP_SERVER:-"clock.redhat.com"}
 
-if [ "$0" = "ng-edpm-deploy-prep.sh" ]; then
+if [ "$(basename $0)" = "ng-edpm-deploy-prep.sh" ]; then
     DEPLOY=0
 else
     DEPLOY=1
