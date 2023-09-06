@@ -17,20 +17,21 @@ fi
 
 pushd ${OPENSTACK_K8S_OPERATORS}/install_yamls
 
-i=0
-while ! oc get crd openstackcontrolplanes.core.openstack.org; do
-    sleep 1
-    ((i++))
-    if [ $i -gt ${WAIT_SECONDS} ]; then
-        echo "openstackcontrolplanes.core.openstack.org CRD not ready after ${WAIT_SECONDS} seconds"
-        exit 1
-    fi
-done
-
 if [ "${DEPLOY}" = "0" ]; then
     make openstack_crds
     make openstack
 else
+
+    i=0
+    while ! oc get crd openstackcontrolplanes.core.openstack.org; do
+        sleep 1
+        ((i++))
+        if [ $i -gt ${WAIT_SECONDS} ]; then
+            echo "openstackcontrolplanes.core.openstack.org CRD not ready after ${WAIT_SECONDS} seconds"
+            exit 1
+        fi
+    done
+
     make openstack_deploy
 fi
 
