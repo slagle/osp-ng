@@ -1,0 +1,7 @@
+if [ -z "${NGRC}" ]; then
+    echo "\$NGRC must be defined"
+fi
+export SCRIPTS_DIR=$(realpath $(dirname ${NGRC})/scripts)
+export OPENSTACK_K8S_OPERATORS=$(realpath $(dirname $NGRC)/../openstack-k8s-operators)
+export PATH=$PATH:${SCRIPTS_DIR}
+export PATH="$HOME/.crc/bin/oc:$PATH"

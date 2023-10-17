@@ -1,4 +1,0 @@
-export SCRIPTS_DIR=$(realpath $(dirname ${BASH_SOURCE[0]})/scripts)
-export OPENSTACK_K8S_OPERATORS="/home/jslagle/code/osp-ng/openstack-k8s-operators"
-export PATH=$PATH:${SCRIPTS_DIR}
-export PATH="$HOME/.crc/bin/oc:$PATH"
