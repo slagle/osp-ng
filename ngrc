@@ -1,6 +1,4 @@
-if [ -z "${NGRC}" ]; then
-    echo "\$NGRC must be defined"
-fi
+NGRC=${NGRC:-"$BASH_SOURCE[0]"}
 export SCRIPTS_DIR=$(realpath $(dirname ${NGRC})/scripts)
 export OPENSTACK_K8S_OPERATORS=$(realpath $(dirname $NGRC)/../openstack-k8s-operators)
 export PATH=$PATH:${SCRIPTS_DIR}
