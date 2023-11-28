@@ -2,18 +2,18 @@
 
 set -eux
 
-export INSTALL_YAMLS=${INSTALL_YAMLS:-"install_yamls"}
+export OPENSTACK_K8S_OPERATORS=${OPENSTACK_K8S_OPERATORS:-"$(pwd)"}
 export NODES=${NODES:-"1"}
 
 if ! which virt-customize; then
     sudo dnf -y install guestfs-tools
 fi
 
-if [ ! -d $INSTALL_YAMLS ]; then
-    git clone https://github.com/openstack-k8s-operators/install_yamls $INSTALL_YAMLS
+if [ ! -d ${OPENSTACK_K8S_OPERATORS}/install_yamls ]; then
+    git clone https://github.com/openstack-k8s-operators/install_yamls ${OPENSTACK_K8S_OPERATORS}/install_yamls
 fi
 
-pushd $INSTALL_YAMLS
+pushd ${OPENSTACK_K8S_OPERATORS}/install_yamls
 cd devsetup
 
 # If let evaluates to 0, it returns 1, which would fail the script
