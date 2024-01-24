@@ -1,9 +1,9 @@
 #!/bin/bash
 
-DOCS_DIR=$(realpath $(dirname $(basename $0))/docs)
+SCRIPT_DIR=$(realpath $(dirname $(basename $0)))
 
 set -eux
 
-pushd ${DOCS_DIR}
+pushd ${SCRIPT_DIR}
 sphinx-build . _build/
 popd
