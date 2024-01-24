@@ -13,6 +13,11 @@
 
 ***
 
+## Dashboard Links
+
+* podified-multinode-edpm-deployment-crc <https://review.rdoproject.org/zuul/builds?job_name=podified-multinode-edpm-deployment-crc>
+* cifmw-crc-podified-edpm-baremetal history <https://review.rdoproject.org/zuul/builds?job_name=cifmw-crc-podified-edpm-baremetal>
+
 ## Commands/Comments
 
 To recheck rdoproject.org jobs (rdoproject.org/github-check) on GitHub PR's
