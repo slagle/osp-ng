@@ -3,6 +3,7 @@
 set -eux
 
 export OPENSTACK_K8S_OPERATORS=${OPENSTACK_K8S_OPERATORS:-"$(pwd)"}
+export CRC_DELETE=${CRC_DELETE:-"1"}
 export CPUS=${CPUS:-"16"}
 export MEMORY=${MEMORY:-"32768"}
 export DISK=${DISK:-"80"}
@@ -13,6 +14,11 @@ if [ ! -f "${PULL_SECRET}" ]; then
     echo "Pull secret does not exist at ${PULL_SECRET}."
     echo "Set \${PULL_SECRET} to the correct path for the pull secret."
     exit 1
+fi
+
+if [ "${CRC_DELETE}" != "1" ]; then
+    rm -f ~/bin/crc
+    rm -rf ~/.crc
 fi
 
 if ! which git; then
