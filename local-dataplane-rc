@@ -1,3 +1,10 @@
 export DATAPLANE_REPO=${DATAPLANE_REPO:-"https://github.com/slagle/dataplane-operator.git"}
-export DATAPLANE_BRANCH=${DATAPLANE_BRANCH:-"main"}
+export DATAPLANE_BRANCH=${DATAPLANE_BRANCH:-""}
+
+if [ -z "${DATAPLANE_BRANCH}" ]; then
+    DATAPLANE_BRANCH=$(git rev-parse --abbrev-ref HEAD)
+fi
+
+export IMG=quay.io/jslagle/dataplane-operator:${DATAPLANE_BRANCH}
 export IMAGE_TAG_BASE=quay.io/jslagle/dataplane-operator
+export DATAPLANE_IMG=quay.io/jslagle/dataplane-operator-index:latest
