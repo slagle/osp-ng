@@ -18,7 +18,6 @@ fi
 pushd ${OPENSTACK_K8S_OPERATORS}/install_yamls
 
 if [ "${DEPLOY}" = "0" ]; then
-    make openstack_crds
     make openstack
 else
 
