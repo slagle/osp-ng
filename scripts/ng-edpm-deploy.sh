@@ -3,6 +3,7 @@
 set -eux
 
 export NODES=${NODES:-"1"}
+export DATAPLANE_TOTAL_NODES=${NODES}
 export OPENSTACK_K8S_OPERATORS=${OPENSTACK_K8S_OPERATORS:-"$(pwd)"}
 export SCRIPTS_DIR=$(dirname $(realpath $0))
 export DATAPLANE_CHRONY_NTP_SERVER=${DATAPLANE_CHRONY_NTP_SERVER:-"clock.redhat.com"}
@@ -19,11 +20,6 @@ fi
 
 pushd ${OPENSTACK_K8S_OPERATORS}/install_yamls
 
-if [ ${NODES} = "1" ]; then
-    export DATAPLANE_SINGLE_NODE=true
-else
-    export DATAPLANE_SINGLE_NODE=false
-fi
 
 if [ "${DEPLOY}" = "0" ]; then
     make edpm_deploy_prep
