@@ -1,0 +1,45 @@
+# deploy openstack-operator
+cd $OPENSTACK_K8S_OPERATORS/install_yamls
+make openstack
+
+# set initial version to 18.0.0
+./set-version.sh
+
+# deploy openstack
+make openstack_deploy
+
+# scale down dataplane-operator
+ng-csv-scale.sh
+# drop dataplane-operator webhooks
+ng-csv-drop-webhooks.sh
+
+# checkout branch of openstack-operator
+cd $OPENSTACK_K8S_OPERATORS/openstack-operator
+git checkout multipathd-image
+# run openstack-operator locally
+METRICS_PORT=9080 HEALTH_PORT=9081 ENABLE_WEBHOOKS=false make run 2>&1 | tee /tmp/oo
+
+# checkout branch of dataplane-operator
+cd $OPENSTACK_K8S_OPERATORS/dataplane-operator
+git checkout version_update2
+# run dataplane-operator locally
+oc apply -f config/crd/bases/
+# use local openstack-operator
+# git stash apply stash@{0}
+OPERATOR_SERVICES=config/services make run 2>&1 | tee /tmp/do
+
+# deploy edpm
+NODES=2 ng-edpm-deploy.sh
+
+# get inventory
+oc get secret dataplanenodeset-openstack-edpm-ipam -o yaml | yq .data.inventory | base64 -d | less
+
+# bump version and ovn image to 18.0.1
+./bump-version.sh
+
+# push new 18.0.1 image
+podman pull quay.io/podified-antelope-centos9/openstack-ovn-controller@sha256:c69cc2600ebc88e548710651a40bfc4ea6368176d23bd6620fee7f812b286a93
+podman tag quay.io/podified-antelope-centos9/openstack-ovn-controller@sha256:c69cc2600ebc88e548710651a40bfc4ea6368176d23bd6620fee7f812b286a93 quay.io/jslagle/openstack-ovn-controller:18.0.1
+podman push quay.io/jslagle/openstack-ovn-controller:18.0.1
+
+
