@@ -1,0 +1,77 @@
+# Prep
+oc delete osdpd sleep
+oc delete osdps sleep
+
+# Show nodeset, networks
+oc get openstackdataplanenodeset
+which ocy
+ocy osdpns
+
+oc get netconfig
+ocy ipset
+
+oc get ipset
+ocy ipset
+
+# Show generated inventory
+oc get secret
+oc get secret dataplanenodeset-openstack-edpm-ipam -o yaml | yq .data.inventory | base64 -d
+
+oc get openstackansibleee
+oc get jobs -l app=openstackansibleee
+oc get pods -l app=openstackansibleee
+oc get pods -l openstackdataplanenodeset=openstack-edpm-ipam,openstackdataplaneservice=configure-network
+oc get pods -l openstackdataplanenodeset=openstack-edpm-ipam,openstackdataplaneservice=configure-network -o name
+oc  logs --tail=-1 -l openstackdataplanenodeset=openstack-edpm-ipam,openstackdataplaneservice=configure-network
+oc debug –as-root $(oc get pods -l openstackdataplanenodeset=openstack-edpm-ipam,openstackdataplaneservice=configure-network -o name)
+
+# Build a custom runner image, use it to debug ansible with a custom service
+cd openstack-ansibleee-runner
+vi Containerfile
+podman build -t quay.io/jslagle/openstack-ansibleee-runner:latest .
+podman push quay.io/jslagle/openstack-ansibleee-runner:latest
+
+cd ..
+cd services
+vi sleep.yaml
+oc apply -f sleep.yaml
+
+cd ..
+cd deployments
+vi sleep.yaml
+oc apply -f sleep.yaml
+
+cd ..
+oc get pods -l openstackdataplaneservice=sleep
+oc debug -t --as-root $(oc get pods -l openstackdataplaneservice=sleep -o name) -- /bin/bash
+...
+cp inventory/hosts inventory/hosts2
+vim inventory/hosts2
+/usr/bin/edpm_entrypoint ansible-runner run /runner --inventory /runner/inventory/hosts2 --playbook osp.edpm.bootstrap
+vim /usr/share/ansible/collections/ansible_collections/osp/edpm/playbooks/configure_network.yml
+ls artifacts
+
+# ansible-ee-logs
+oc get pods $(oc get pods -l openstackdataplaneservice=sleep -o name) -o yaml | less
+oc get pvc ansible-ee-logs
+oc get pv local-storage04-crc-vlf7c-master-0 -o yaml
+oc get nodes
+oc debug nodes/crc-vlf7c-master-0
+cd /host/mnt/openstack/pv04
+
+# EDPM nodes. From host06...
+ssh root@host06.beaker.tripleo.ral3.eng.rdu2.redhat.com
+su - stack
+cd openstack-k8s-operators
+cd install_yamls
+ssh -i out/edpm/ansibleee-ssh-key-id_rsa root@192.168.122.100
+podman ps
+cd /var/lib/edpm-config
+cd /etc/os-net-config
+cd /var/lib/openstack
+vi ./config/nova/01-nova.conf
+
+oc get openstackdataplaneservice nova-custom -o yaml
+oc get secrets nova-cell1-compute-config -o json | jq -r '.data["01-nova.conf"]' | base64 -d
+oc get openstackansibleee nova-custom-edpm-deployment-ipam-openstack-edpm-ipam -o yaml | less
+
