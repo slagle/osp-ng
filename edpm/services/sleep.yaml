@@ -1,0 +1,13 @@
+apiVersion: dataplane.openstack.org/v1beta1
+kind: OpenStackDataPlaneService
+metadata:
+  name: sleep
+spec:
+  openStackAnsibleEERunnerImage: quay.io/jslagle/openstack-ansibleee-runner:latest
+  play: |
+    - name: Sleep
+      hosts: all
+      gather_facts: false
+      tasks:
+        - name: sleep infinity
+          shell: sleep infinity

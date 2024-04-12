@@ -1,0 +1,4 @@
+FROM quay.io/openstack-k8s-operators/openstack-ansibleee-runner:latest
+USER root
+RUN microdnf -y install vim
+ENV HOME /home/runner
