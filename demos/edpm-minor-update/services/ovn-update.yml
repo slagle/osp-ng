@@ -1,0 +1,31 @@
+apiVersion: dataplane.openstack.org/v1beta1
+kind: OpenStackDataPlaneService
+metadata:
+  name: ovn-update
+spec:
+  containerImageFields:
+  - OvnControllerImage
+  configMaps:
+  - ovncontroller-config
+  play: |
+    - name: Update EDPM OVN
+      hosts: all
+      become: true
+      tasks:
+        - name: Update OVN
+          ansible.builtin.import_role:
+            name: osp.edpm.edpm_ovn
+            tasks_from: run.yml
+  tlsCert:
+    contents:
+    - dnsnames
+    - ips
+    networks:
+    - ctlplane
+    issuer: osp-rootca-issuer-ovn
+    keyUsages:
+      - digital signature
+      - key encipherment
+      - server auth
+      - client auth
+  caCerts: combined-ca-bundle

@@ -1,10 +1,24 @@
 #!/bin/bash
 set -eux
 
-INITIAL_VERSION=18.0.0
-CSV_OPERATOR=openstack
-CONTROLLER_MANAGER=openstack-operator-controller-manager
-INDEX=$(oc get csv ${CSV_OPERATOR}-operator.v0.0.1 -o json | jq ".spec.install.spec.deployments | map(.name==\"${CONTROLLER_MANAGER}\") | index(true)")
-CONTAINERS_INDEX=$(oc get csv ${CSV_OPERATOR}-operator.v0.0.1 -o json | jq ".spec.install.spec.deployments[${INDEX}].spec.template.spec.containers | map(.name==\"manager\") | index(true)")
-ENV_INDEX=$(oc get csv ${CSV_OPERATOR}-operator.v0.0.1 -o json | jq ".spec.install.spec.deployments[${INDEX}].spec.template.spec.containers[${CONTAINERS_INDEX}].env | map(.name==\"OPENSTACK_RELEASE_VERSION\") | index(true)")
-oc -n openstack-operators patch csv ${CSV_OPERATOR}-operator.v0.0.1 --type='json' -p='[{"op": "replace", "path": "/spec/install/spec/deployments/'${INDEX}'/spec/template/spec/containers/'${CONTAINERS_INDEX}'/env/'${ENV_INDEX}'/value", "value":'${INITIAL_VERSION}'}]'
+SCRIPT_DIR="$( cd "$(dirname "$0")" >/dev/null 2>&1 ; pwd -P )"
+VERSION=${VERSION:-"18.0.1"}
+
+if [ "${VERSION}" = "18.0.1" ]; then
+    OPENSTACK_RELEASE_VERSION=${OPENSTACK_RELEASE_VERSION:-"18.0.1"}
+    RELATED_IMAGE_OVN_CONTROLLER_IMAGE_URL_DEFAULT=${RELATED_IMAGE_OVN_CONTROLLER_IMAGE_URL_DEFAULT:-"quay.io/jslagle/openstack-ovn-controller:18.0.1"}
+fi
+
+if [ "${VERSION}" = "18.0.0" ]; then
+    OPENSTACK_RELEASE_VERSION=${OPENSTACK_RELEASE_VERSION:-"18.0.0"}
+    RELATED_IMAGE_OVN_CONTROLLER_IMAGE_URL_DEFAULT=${RELATED_IMAGE_OVN_CONTROLLER_IMAGE_URL_DEFAULT:-"quay.io/podified-antelope-centos9/openstack-ovn-controller@sha256:c69cc2600ebc88e548710651a40bfc4ea6368176d23bd6620fee7f812b286a93"}
+fi
+
+# Set $OPENSTACK_RELEASE_VERSION
+oc -n openstack-operators patch csv ${CSV_OPERATOR}-operator.v0.0.1 --type='json' -p='[{"op": "replace", "path": "/spec/install/spec/deployments/'${INDEX}'/spec/template/spec/containers/'${CONTAINERS_INDEX}'/env/'${ENV_INDEX}'/value", "value":'${OPENSTACK_RELEASE_VERSION}'}]'
+
+# Set $RELATED_IMAGE_OVN_CONTROLLER_IMAGE_URL_DEFAULT
+oc -n openstack-operators patch csv ${CSV_OPERATOR}-operator.v0.0.1 --type='json' -p='[{"op": "replace", "path": "/spec/install/spec/deployments/'${INDEX}'/spec/template/spec/containers/'${CONTAINERS_INDEX}'/env/'${OVN_ENV_INDEX}'/value", "value":'${RELATED_IMAGE_OVN_CONTROLLER_IMAGE_URL_DEFAULT}'}]'
+
+# Print result
+${SCRIPT_DIR}/check.sh
