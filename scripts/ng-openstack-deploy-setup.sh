@@ -1,1 +1,0 @@
-ng-openstack-deploy.sh

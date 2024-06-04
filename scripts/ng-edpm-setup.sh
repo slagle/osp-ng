@@ -4,6 +4,7 @@ set -eux
 
 export OPENSTACK_K8S_OPERATORS=${OPENSTACK_K8S_OPERATORS:-"$(pwd)"}
 export NODES=${NODES:-"1"}
+export DATAPLANE_TOTAL_NODES=${DATAPLANE_TOTAL_NODES:-"$NODES"}
 
 if ! which virt-customize; then
     sudo dnf -y install guestfs-tools
