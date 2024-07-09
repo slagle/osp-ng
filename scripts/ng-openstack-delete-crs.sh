@@ -22,6 +22,8 @@ for crd in ${crds}; do
     delete_crs ${crd} &
 done
 
+delete_crs configmap
 delete_crs secret
+delete_crs service
 
 wait
