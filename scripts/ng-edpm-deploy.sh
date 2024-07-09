@@ -6,7 +6,11 @@ export NODES=${NODES:-"1"}
 export DATAPLANE_TOTAL_NODES=${NODES}
 export OPENSTACK_K8S_OPERATORS=${OPENSTACK_K8S_OPERATORS:-"$(pwd)"}
 export SCRIPTS_DIR=$(dirname $(realpath $0))
-export DATAPLANE_CHRONY_NTP_SERVER=${DATAPLANE_CHRONY_NTP_SERVER:-"clock.redhat.com"}
+export DATAPLANE_NTP_SERVER=${DATAPLANE_NTP_SERVER:-"clock.redhat.com"}
+
+export OUT=${OUT:-"${OPENSTACK_K8S_OPERATORS}/install_yamls/out"}
+export NAMESPACE=${NAMESPACE:-"openstack"}
+export DEPLOY_DIR=${OUT}/${NAMESPACE}/dataplane/cr
 
 if [ "$(basename $0)" = "ng-edpm-deploy-prep.sh" ]; then
     DEPLOY=0
@@ -24,7 +28,9 @@ pushd ${OPENSTACK_K8S_OPERATORS}/install_yamls
 if [ "${DEPLOY}" = "0" ]; then
     make edpm_deploy_prep
 else
-    make edpm_deploy
+    # make edpm_deploy
+    oc apply -f devsetup/edpm/config/ansible-ee-env.yaml
+    oc kustomize ${DEPLOY_DIR} | oc apply -f -
 fi
 
 popd
