@@ -5,6 +5,8 @@ export OPENSTACK_K8S_OPERATORS=$(realpath $(dirname $NGRC)/../openstack-k8s-oper
 export PATH=$PATH:${SCRIPTS_DIR}
 export PATH="$HOME/.crc/bin/oc:$PATH"
 
+source <(oc completion bash)
+
 function ocy {
     crd=$1
     idx=${2:-0}
