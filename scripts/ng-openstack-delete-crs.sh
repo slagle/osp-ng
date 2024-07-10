@@ -25,5 +25,6 @@ done
 delete_crs configmap
 delete_crs secret
 delete_crs service
+delete_crs pvc
 
 wait
