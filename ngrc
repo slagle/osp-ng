@@ -12,3 +12,10 @@ function ocy {
     idx=${2:-0}
     oc get $crd -o yaml | yq -C .items[$idx] | less -R
 }
+
+function k9s {
+    if [ ! -f ~/bin/k9s ]; then
+        curl -k -L -o - https://github.com/derailed/k9s/releases/download/v0.32.5/k9s_Linux_amd64.tar.gz | tar -C ~/bin -f - -z -x k9s
+    fi
+    ~/bin/k9s
+}
