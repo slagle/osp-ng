@@ -4,7 +4,7 @@ set -eux
 
 SCRIPT_DIR="$( cd "$(dirname "$0")" >/dev/null 2>&1 ; pwd -P )"
 CSV_OPERATOR=${CSV_OPERATOR:-"openstack"}
-OPERATOR=${OPERATOR:-"dataplane"}
+OPERATOR=${OPERATOR:-"openstack"}
 CONTROLLER_MANAGER=${CONTROLLER_MANAGER:-"${OPERATOR}-operator-controller-manager"}
 SCALE=${SCALE:-0}
 
