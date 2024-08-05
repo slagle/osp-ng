@@ -7,6 +7,7 @@ CSV_OPERATOR=${CSV_OPERATOR:-"openstack"}
 OPERATOR=${OPERATOR:-"openstack"}
 CONTROLLER_MANAGER=${CONTROLLER_MANAGER:-"${OPERATOR}-operator-controller-manager"}
 SCALE=${SCALE:-0}
+CSV_VERSION=${CSV_VERSION:-"v0.0.1"}
 
 source ${SCRIPT_DIR}/common.sh
 
