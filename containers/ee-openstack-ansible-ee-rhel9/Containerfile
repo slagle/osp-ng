@@ -1,0 +1,3 @@
+FROM registry.redhat.io/rhoso-operators/ee-openstack-ansible-ee-rhel9@sha256:f731b4c6141385d7ee9d3fe17e2a5c29f245c0ece0ea09608b3c4bc8ad80addf
+
+RUN microdnf -y install vim less
