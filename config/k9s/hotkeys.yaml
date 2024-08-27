@@ -1,0 +1,37 @@
+---
+hotKeys:
+
+  shift-1:
+    shortCut:     Shift-1
+    description:  View OpenstackDataPlaneNodeSets
+    command:      openstackdataplanenodesets openstack
+
+  shift-2:
+    shortCut:     Shift-2
+    description:  View OpenstackDataPlaneDeployments
+    command:      openstackdataplanedeployments openstack
+
+  shift-3:
+    shortCut:     Shift-3
+    description:  View OpenstackAnsibleEEs
+    command:      openstackansibleees openstack
+
+  shift-4:
+    shortCut:     Shift-4
+    description:  View Jobs
+    command:      jobs
+
+  shift-5:
+    shortCut:     Shift-5
+    description:  View Certificates /edpm-compute
+    command:      certificates /edpm-compute
+
+  shift-6:
+    shortCut:     Shift-6
+    description:  View CertificateRequests /edpm-compute
+    command:      certificaterequests /edpm-compute
+
+  shift-0:
+    shortCut:     Shift-0
+    description:  View CSVs openstack-operators
+    command:      csvs openstack-operators
