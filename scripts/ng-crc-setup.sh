@@ -16,7 +16,7 @@ if [ ! -f "${PULL_SECRET}" ]; then
     exit 1
 fi
 
-if [ "${CRC_DELETE}" != "1" ]; then
+if [ "${CRC_DELETE}" = "1" ]; then
     rm -f ~/bin/crc
     rm -rf ~/.crc
 fi
