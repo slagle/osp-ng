@@ -1,0 +1,1 @@
+ng-crc-setup.sh
