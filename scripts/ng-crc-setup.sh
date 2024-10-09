@@ -3,7 +3,7 @@
 set -eux
 
 export OPENSTACK_K8S_OPERATORS=${OPENSTACK_K8S_OPERATORS:-"$(pwd)"}
-export CRC_DELETE=${CRC_DELETE:-"1"}
+export CRC_DELETE=${CRC_DELETE:-"0"}
 export CPUS=${CPUS:-"16"}
 export MEMORY=${MEMORY:-"32768"}
 export DISK=${DISK:-"80"}
