@@ -19,3 +19,9 @@ function k9s {
     fi
     ~/bin/k9s
 }
+
+function ng-pull {
+    pushd ${NG_DIR}
+    git pull
+    popd
+}
