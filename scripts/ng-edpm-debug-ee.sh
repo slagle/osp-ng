@@ -8,7 +8,7 @@ SERVICE=${SERVICE:-"run-os"}
 IMAGE=${IMAGE:-""}
 
 echo "#################"
-echo "/opt/builder/bin/edpm_entrypoint ansible-runner run /runner -p osp.edpm.${SERVICE} -i ${SERVICE}-${DEPLOYMENT}-${NODESET}"
+echo "/opt/builder/bin/edpm_entrypoint ansible-runner run /runner -p osp.edpm.${SERVICE/-/_} -i ${SERVICE}-${DEPLOYMENT}-${NODESET}"
 echo "#################"
 
 if [ "${IMAGE}" != "" ]; then
@@ -19,4 +19,4 @@ fi
 
 oc debug --as-root --keep-annotations \
     ${IMAGE_ARG} \
-    job/${SERVICE/-/_}-${DEPLOYMENT}-${NODESET}
+    job/${SERVICE}-${DEPLOYMENT}-${NODESET}
