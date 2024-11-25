@@ -2,7 +2,7 @@
 
 set -eux
 
-DEPLOYMENT=${DEPLOYMENT:-"edpm-deployment-ipam"}
+DEPLOYMENT=${DEPLOYMENT:-"edpm-deployment"}
 NODESET=${NODESET:-"openstack-edpm-ipam"}
 SERVICE=${SERVICE:-"run-os"}
 IMAGE=${IMAGE:-""}
