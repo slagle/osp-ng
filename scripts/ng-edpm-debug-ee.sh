@@ -1,10 +1,22 @@
 #!/bin/bash
 
+set -eux
+
 DEPLOYMENT=${DEPLOYMENT:-"edpm-deployment-ipam"}
 NODESET=${NODESET:-"openstack-edpm-ipam"}
 SERVICE=${SERVICE:-"run-os"}
+IMAGE=${IMAGE:-""}
 
 echo "#################"
 echo "/opt/builder/bin/edpm_entrypoint ansible-runner run /runner -p osp.edpm.${SERVICE} -i ${SERVICE}-${DEPLOYMENT}-${NODESET}"
 echo "#################"
-oc debug --as-root --keep-annotations job/${SERVICE}-${DEPLOYMENT}-${NODESET}
+
+if [ "${IMAGE}" != "" ]; then
+    IMAGE_ARG="--image ${IMAGE}"
+else
+    IMAGE_ARG=""
+fi
+
+oc debug --as-root --keep-annotations \
+    ${IMAGE_ARG} \
+    job/${SERVICE/-/_}-${DEPLOYMENT}-${NODESET}
