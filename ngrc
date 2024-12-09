@@ -1,8 +1,8 @@
 NGRC=${NGRC:-"$(realpath $BASH_SOURCE)"}
 export NG_DIR=$(realpath $(dirname ${NGRC}))
-export SCRIPTS_DIR=${NG_DIR}/scripts
+export NG_SCRIPTS_DIR=${NG_DIR}/scripts
 export OPENSTACK_K8S_OPERATORS=$(realpath $(dirname $NGRC)/../openstack-k8s-operators)
-export PATH=$PATH:${SCRIPTS_DIR}
+export PATH=$PATH:${NG_SCRIPTS_DIR}
 export PATH="$HOME/.crc/bin/oc:$PATH"
 export DATAPLANE_NTP_SERVER=${DATAPLANE_NTP_SERVER:-"clock.redhat.com"}
 
@@ -25,4 +25,12 @@ function ng-pull {
     pushd ${NG_DIR}
     git pull
     popd
+}
+
+function ngc {
+    cat "${NG_SCRIPTS_DIR}/$@"
+}
+
+function ngl {
+    less "${NG_SCRIPTS_DIR}/$@"
 }

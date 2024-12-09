@@ -2,7 +2,7 @@
 
 set -eux
 
-source ${SCRIPTS_DIR}/../local-dataplane-rc
+source ${NG_DIR}/../local-dataplane-rc
 
 make bundle
 make bundle-build
