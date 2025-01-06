@@ -3,8 +3,8 @@
 set -eux
 
 export OPENSTACK_K8S_OPERATORS=${OPENSTACK_K8S_OPERATORS:-"$(pwd)"}
-export CRC_DELETE=${CRC_DELETE:-"1"}
-export CRC_RESET=${CRC_RESET:-"0"}
+export CRC_SCRUB=${CRC_SCRUB:-"1"}
+export CRC_CLEANUP=${CRC_CLEANUP:-"0"}
 export DOWNLOAD_TOOLS=${DOWNLOAD_TOOLS:-"1"}
 export CPUS=${CPUS:-"16"}
 export MEMORY=${MEMORY:-"32768"}
@@ -19,9 +19,9 @@ if [ ! -f "${PULL_SECRET}" ]; then
 fi
 
 if [ "$(basename $0)" = "ng-crc-reset.sh" ]; then
-    CRC_DELETE=0
+    CRC_SCRUB=0
     DOWNLOAD_TOOLS=0
-    CRC_RESET=1
+    CRC_CLEANUP=1
 fi
 
 if [ ! -d ${OPENSTACK_K8S_OPERATORS}/install_yamls ]; then
@@ -43,13 +43,12 @@ fi
 
 pushd devsetup
 
-if [ "${CRC_RESET}" = "1" ]; then
-    make crc_cleanup
+if [ "${CRC_CLEANUP}" = "1" ]; then
+    make crc_cleanup || :
 fi
 
-if [ "${CRC_DELETE}" = "1" ]; then
-    make crc_cleanup
-    make crc_scrub
+if [ "${CRC_SCRUB}" = "1" ]; then
+    make crc_scrub || :
 fi
 
 if [ "${DOWNLOAD_TOOLS}" = "1" ]; then
