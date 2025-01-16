@@ -64,3 +64,6 @@ popd
 make crc_storage
 
 popd
+
+# Fix chrony clock source
+ng-crc-ssh.sh sed 's/pool.*/pool\ clock.redhat.com\ iburst/' /etc/chrony.conf
