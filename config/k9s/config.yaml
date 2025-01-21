@@ -1,0 +1,4 @@
+k9s:
+  logger:
+    textWrap: true
+    tail: 1000
