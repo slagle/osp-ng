@@ -18,16 +18,21 @@ hotKeys:
 
   shift-4:
     shortCut:     Shift-4
-    description:  View BaremetalHosts
-    command:      baremetalhosts
+    description:  View OpenStackBaremetalSets
+    command:      openstackbaremetalsets
 
   shift-5:
     shortCut:     Shift-5
-    description:  View Certificates /edpm-compute
-    command:      certificates /edpm-compute
+    description:  View BaremetalHosts
+    command:      baremetalhosts
 
   shift-6:
     shortCut:     Shift-6
+    description:  View Certificates /edpm-compute
+    command:      certificates /edpm-compute
+
+  shift-7:
+    shortCut:     Shift-7
     description:  View CertificateRequests /edpm-compute
     command:      certificaterequests /edpm-compute
 
