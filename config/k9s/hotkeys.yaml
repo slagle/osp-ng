@@ -14,17 +14,17 @@ hotKeys:
   shift-3:
     shortCut:     Shift-3
     description:  View Jobs
-    command:      jobs
+    command:      jobs openstack
 
   shift-4:
     shortCut:     Shift-4
     description:  View OpenStackBaremetalSets
-    command:      openstackbaremetalsets
+    command:      openstackbaremetalsets openstack
 
   shift-5:
     shortCut:     Shift-5
     description:  View BaremetalHosts
-    command:      baremetalhosts
+    command:      baremetalhosts openstack
 
   shift-6:
     shortCut:     Shift-6
