@@ -1,0 +1,2 @@
+NG_DIR=$(dirname $(realpath $BASH_SOURCE))
+ln -f -s ${NG_DIR}/ngrc ~/bin/ngrc

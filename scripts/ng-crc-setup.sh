@@ -5,6 +5,9 @@ set -eux
 export OPENSTACK_K8S_OPERATORS=${OPENSTACK_K8S_OPERATORS:-"$(pwd)"}
 export CRC_SCRUB=${CRC_SCRUB:-"1"}
 export CRC_CLEANUP=${CRC_CLEANUP:-"0"}
+# 2.41.0 corresponds to OCP 4.16.7
+# https://mirror.openshift.com/pub/openshift-v4/clients/crc/2.41.0/
+export CRC_VERSION=${CRC_VERSION:-"2.41.0"}
 export DOWNLOAD_TOOLS=${DOWNLOAD_TOOLS:-"1"}
 export CPUS=${CPUS:-"16"}
 export MEMORY=${MEMORY:-"32768"}
