@@ -5,7 +5,7 @@ export OPENSTACK_K8S_OPERATORS=$(realpath $(dirname $NGRC)/../openstack-k8s-oper
 export PATH=$PATH:${NG_SCRIPTS_DIR}
 export PATH="$HOME/.crc/bin/oc:$PATH"
 
-if ping -c 1 clock.redhat.com 2>&1 1>/dev/null; then
+if ping -c 1 clock.redhat.com 2>/dev/null 1>/dev/null; then
     export DATAPLANE_NTP_SERVER=${DATAPLANE_NTP_SERVER:-"clock.redhat.com"}
 fi
 

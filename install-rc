@@ -1,8 +1,0 @@
-#!/bin/bash
-
-mkdir -p ${HOME}/bin
-ln -s "$(dirname $(realpath ${BASH_SOURCE}))"/ngrc ${HOME}/bin/ngrc
-
-if ! grep ngrc ~/.bashrc; then
-    echo "source ngrc" >> ~/.bashrc
-fi
