@@ -13,12 +13,24 @@ source ${SCRIPT_DIR}/common.sh
 
 oc project openstack-operators
 
-INDEX=$(oc get csv ${CSV_OPERATOR}-operator.${CSV_VERSION} -o json | jq ".spec.install.spec.deployments | map(.name==\"${CONTROLLER_MANAGER}\") | index(true)")
+if [ "${NG_RELEASE}" = "FR1" ]; then
+    INDEX=$(oc get csv ${CSV_OPERATOR}-operator.${CSV_VERSION} -o json | jq ".spec.install.spec.deployments | map(.name==\"${CONTROLLER_MANAGER}\") | index(true)")
 
-if [ ${INDEX} != "null" ]; then
-    oc patch csv ${CSV_OPERATOR}-operator.${CSV_VERSION} --type='json' -p='[{"op": "replace", "path": "/spec/install/spec/deployments/'${INDEX}'/spec/replicas", "value":'${SCALE}'}]'
+    if [ ${INDEX} != "null" ]; then
+        oc patch csv ${CSV_OPERATOR}-operator.${CSV_VERSION} --type='json' -p='[{"op": "replace", "path": "/spec/install/spec/deployments/'${INDEX}'/spec/replicas", "value":'${SCALE}'}]'
+    else
+        echored "${CONTROLLER_MANAGER} not found in ${CSV_OPERATOR} csv"
+    fi
 else
-    echored "${CONTROLLER_MANAGER} not found in ${CSV_OPERATOR} csv"
+    csv=$(oc get csv -o name | grep openstack-operator)
+    oc patch -n openstack-operators "${csv}" --type json \
+      -p="[{"op": "replace", "path": "/spec/install/spec/deployments/0/spec/replicas", "value": "${SCALE}"}]"
+    oc patch deployment -n openstack-operators ${CONTROLLER_MANAGER} --type json \
+    -p="[{"op": "replace", "path": "/spec/replicas", "value": "${SCALE}"}]"
+    if [ "${SCALE}" = "0" ]; then
+        oc delete mutatingwebhookconfiguration -l app.kubernetes.io/created-by=openstack-operator
+        oc delete validatingwebhookconfiguration -l app.kubernetes.io/created-by=openstack-operator
+    fi
 fi
 
 oc project openstack
