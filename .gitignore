@@ -130,3 +130,5 @@ dmypy.json
 
 gitignored/inventory
 gitignored/ssh_key
+
+*.swp
