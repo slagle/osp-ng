@@ -12,6 +12,10 @@ export OUT=${OUT:-"${OPENSTACK_K8S_OPERATORS}/install_yamls/out"}
 export NAMESPACE=${NAMESPACE:-"openstack"}
 export DEPLOY_DIR=${OUT}/${NAMESPACE}/dataplane/cr
 
+if [ -d "${DEPLOY_DIR}" ]; then
+    mv ${DEPLOY_DIR} ${OUT}/${NAMESPACE}/dataplane/cr-$(date +%D-%T)
+fi
+
 if [ "$(basename $0)" = "ng-edpm-deploy-prep.sh" ]; then
     DEPLOY=0
 else
