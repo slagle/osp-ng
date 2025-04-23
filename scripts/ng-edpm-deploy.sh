@@ -10,7 +10,7 @@ export DATAPLANE_NTP_SERVER=${DATAPLANE_NTP_SERVER:-"clock.redhat.com"}
 
 export OUT=${OUT:-"${OPENSTACK_K8S_OPERATORS}/install_yamls/out"}
 export NAMESPACE=${NAMESPACE:-"openstack"}
-export DEPLOY_DIR=${OUT}/${NAMESPACE}/dataplane
+export DEPLOY_DIR=${OUT}/${NAMESPACE}/dataplane/cr
 
 if [ "$(basename $0)" = "ng-edpm-deploy-prep.sh" ]; then
     DEPLOY=0
@@ -19,7 +19,7 @@ else
 fi
 
 if [ -d "${DEPLOY_DIR}" ] && [ "${DEPLOY}" = "0" ]; then
-    mv ${DEPLOY_DIR} ${OUT}/${NAMESPACE}/dataplane-$(date +%D-%T)
+    mv ${DEPLOY_DIR}/../../dataplane ${OUT}/${NAMESPACE}/dataplane-$(date +%D-%T)
 fi
 
 if [ ! -d ${OPENSTACK_K8S_OPERATORS}/install_yamls ]; then
