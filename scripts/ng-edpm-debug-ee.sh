@@ -19,5 +19,4 @@ fi
 
 oc debug --as-root --keep-annotations \
     ${IMAGE_ARG} \
-    job/${SERVICE}-${DEPLOYMENT}-${NODESET} \
-    -- /bin/bash
+    job/${SERVICE}-${DEPLOYMENT}-${NODESET}
