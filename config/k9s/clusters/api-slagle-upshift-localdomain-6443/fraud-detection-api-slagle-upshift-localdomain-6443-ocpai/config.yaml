@@ -1,0 +1,13 @@
+k9s:
+  cluster: api-slagle-upshift-localdomain:6443
+  namespace:
+    active: fraud-detection
+    lockFavorites: false
+    favorites:
+    - fraud-detection
+    - default
+  view:
+    active: context
+  featureGates:
+    nodeShell: false
+  portForwardAddress: localhost
