@@ -19,7 +19,7 @@ else
 fi
 
 if [ -d "${DEPLOY_DIR}" ] && [ "${DEPLOY}" = "0" ]; then
-    mv ${DEPLOY_DIR}/../../dataplane ${OUT}/${NAMESPACE}/dataplane-$(date +%D-%T)
+    mv ${DEPLOY_DIR}/../../dataplane ${OUT}/${NAMESPACE}/dataplane-$(date +%s)
 fi
 
 if [ ! -d ${OPENSTACK_K8S_OPERATORS}/install_yamls ]; then

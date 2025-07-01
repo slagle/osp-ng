@@ -70,3 +70,10 @@ popd
 
 # Fix chrony clock source
 ng-crc-ssh.sh sed 's/pool.*/pool\ clock.redhat.com\ iburst/' /etc/chrony.conf
+
+echo "#############################################"
+echo "You probably want to run:"
+echo "make openstack"
+echo "make openstack_init"
+echo "ng-crc-deploy.sh"
+echo "#############################################"
