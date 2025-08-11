@@ -15,10 +15,15 @@ if [ ! -d ${OPENSTACK_K8S_OPERATORS}/install_yamls ]; then
     git clone https://github.com/openstack-k8s-operators/install_yamls ${OPENSTACK_K8S_OPERATORS}/install_yamls
 fi
 
+if [ "${NG_RHEL}" = "1" ]; then
+    oc patch image.config.openshift.io/cluster --type='merge' -p '{"spec":{"registrySources":{"insecureRegistries":["*.redhat.com","registry-proxy.engineering.redhat.com"]}}}'
+fi
+
 pushd ${OPENSTACK_K8S_OPERATORS}/install_yamls
 
 if [ "${DEPLOY}" = "0" ]; then
     make openstack_deploy_prep
+    make openstack_init
 else
 
     i=0

@@ -2,6 +2,7 @@ NGRC=${NGRC:-"$(realpath $BASH_SOURCE)"}
 export NG_DIR=$(realpath $(dirname ${NGRC}))
 export NG_SCRIPTS_DIR=${NG_DIR}/scripts
 export NG_RELEASE="FR2"
+export NG_RHEL=${NG_RHEL:-"0"}
 export OPENSTACK_K8S_OPERATORS=$(realpath $(dirname $NGRC)/../openstack-k8s-operators)
 export PATH=$PATH:${NG_SCRIPTS_DIR}
 export PATH="$HOME/.crc/bin/oc:$PATH"
