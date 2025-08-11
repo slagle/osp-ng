@@ -31,9 +31,20 @@ pushd ${OPENSTACK_K8S_OPERATORS}/install_yamls
 
 if [ "${DEPLOY}" = "0" ]; then
     make edpm_deploy_prep
+
+    if [ "${NG_RHEL}" = "1" ]; then
+        oc apply -f ${NG_DIR}/edpm/services/rhos-release-repo-setup.yaml
+    fi
+
 else
     # make edpm_deploy
     oc apply -f devsetup/edpm/config/ansible-ee-env.yaml
+
+    if [ "${NG_RHEL}" = "1" ]; then
+        sed -i 's/repo-setup/rhos-release-repo-setup/' ${DEPLOY_DIR}/kustomization.yaml 
+        sed -i '/  - telemetry/d' ${DEPLOY_DIR}/dataplane.yaml 
+    fi
+
     oc kustomize ${DEPLOY_DIR} | oc apply -f -
 fi
 
