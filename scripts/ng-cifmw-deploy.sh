@@ -6,6 +6,7 @@ export OPENSTACK_K8S_OPERATORS=${OPENSTACK_K8S_OPERATORS:-"$(pwd)"}
 export SCRIPTS_DIR=$(dirname $(realpath $0))
 export FLUSH_CACHE=${FLUSH_CACHE:-"--flush-cache"}
 export RRIP=${RRIP:-""}
+export CIFMW_DIR=${CIFMW_DIR:-"${HOME}/ci-framework"}
 
 if [ -z "${RRIP}" ]; then
     echo "${RRIP} MUST BE SET TO redhat.registry.io PASSWORD!"
