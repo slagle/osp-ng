@@ -29,5 +29,6 @@ ansible-playbook \
   -e cifmw_nolog=false \
   -e registry_redhat_io_password=${RRIP} \
   ${FLUSH_CACHE} \
+  $@
 
 popd

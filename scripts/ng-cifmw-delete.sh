@@ -19,6 +19,7 @@ pushd ${CIFMW_DIR}
 ansible-playbook -i custom/inventory.yml \
     -e cifmw_target_host=hypervisor-1 \
     reproducer-clean.yml \
-    ${DEEPSCRUB_ARGS}
+    ${DEEPSCRUB_ARGS} \
+    $@
 
 popd
