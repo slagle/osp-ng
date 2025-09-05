@@ -9,7 +9,7 @@ export RRIP=${RRIP:-""}
 export CIFMW_DIR=${CIFMW_DIR:-"${HOME}/ci-framework"}
 
 if [ -z "${RRIP}" ]; then
-    echo "${RRIP} MUST BE SET TO redhat.registry.io PASSWORD!"
+    echo "\${RRIP} MUST BE SET TO redhat.registry.io PASSWORD!"
     exit 1
 fi
 

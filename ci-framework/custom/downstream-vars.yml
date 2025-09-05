@@ -30,4 +30,4 @@ cifmw_architecture_user_kustomize_99_registry_login:
             ansibleVars:
               edpm_container_registry_logins:
                 registry.redhat.io:
-                  jslagle@redhat.com: {{ registry_redhat_io_password }}
+                  jslagle@redhat.com: "{{ registry_redhat_io_password }}"
