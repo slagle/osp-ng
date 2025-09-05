@@ -1,0 +1,8 @@
+all:
+  hosts:
+    localhost:
+      ansible_connection: local
+    hypervisor-1:
+      ansible_host: host05.beaker.tripleo.ral3.eng.rdu2.redhat.com
+      ansible_user: zuul  # note: you want to match the "remote_user" set in the bootstrap play
+      ansible_ssh_private_key_file: ~/.ssh/id_rsa
