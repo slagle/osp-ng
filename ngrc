@@ -39,3 +39,8 @@ function ngc {
 function ngl {
     less "${NG_SCRIPTS_DIR}/$@"
 }
+
+# ng echo clone
+function ngec {
+    echo "git clone https://github.com/slagle/osp-ng"
+}
