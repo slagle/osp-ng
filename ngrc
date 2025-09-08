@@ -43,4 +43,6 @@ function ngl {
 # ng echo clone
 function ngec {
     echo "git clone https://github.com/slagle/osp-ng"
+    echo "osp-ng/install-ngrc"
+    echo "source ngrc"
 }
