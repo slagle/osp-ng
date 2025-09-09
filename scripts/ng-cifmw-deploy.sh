@@ -6,7 +6,7 @@ export OPENSTACK_K8S_OPERATORS=${OPENSTACK_K8S_OPERATORS:-"$(pwd)"}
 export SCRIPTS_DIR=$(dirname $(realpath $0))
 export FLUSH_CACHE=${FLUSH_CACHE:-"--flush-cache"}
 export RRIP=${RRIP:-""}
-export CIFMW_DIR=${CIFMW_DIR:-"${HOME}/ci-framework"}
+export CIFMW_DIR=${CIFMW_DIR:-"${OPENSTACK_K8S_OPERATORS}/ci-framework"}
 export DOWNSTREAM=${DOWNSTREAM:-"1"}
 
 if [ -z "${RRIP}" ]; then
@@ -15,6 +15,15 @@ if [ -z "${RRIP}" ]; then
 fi
 
 pushd ${CIFMW_DIR}
+
+if [ ! -d "test-python" ]; then
+  echo "make setup_molecule needs to be run from ${CIFMW_DIR}"
+  echo "cd ${CIFMW_DIR}"
+  echo "make setup_molecule"
+  exit 1
+fi
+
+source test-python/bin/activate
 
 if [ "${DOWNSTREAM}" = "1" ]; then
   DOWNSTREAM_ARGS="-e @${NG_DIR}/ci-framework/custom/downstream-vars.yml"
