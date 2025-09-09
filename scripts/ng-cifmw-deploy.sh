@@ -16,14 +16,14 @@ fi
 
 pushd ${CIFMW_DIR}
 
-if [ ! -d "~/test-python" ]; then
+if [ ! -d "${HOME}/test-python" ]; then
   echo "make setup_molecule needs to be run from ${CIFMW_DIR}"
   echo "cd ${CIFMW_DIR}"
   echo "make setup_molecule"
   exit 1
 fi
 
-source ~/test-python/bin/activate
+source ${HOME}/test-python/bin/activate
 
 if [ "${DOWNSTREAM}" = "1" ]; then
   DOWNSTREAM_ARGS="-e @${NG_DIR}/ci-framework/custom/downstream-vars.yml"
