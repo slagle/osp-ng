@@ -20,14 +20,3 @@ cifmw_cephadm_prometheus_container_image: registry-proxy.engineering.redhat.com/
 cifmw_cephadm_prometheus_container_ns: registry-proxy.engineering.redhat.com/prometheus
 cifmw_cephadm_single_host_defaults: false
 cifmw_cephadm_update_container_tag: '7'
-
-cifmw_architecture_user_kustomize_99_registry_login:
-  edpm-pre-ceph-nodeset:
-    edpm-nodeset-values:
-      data:
-        nodeset:
-          ansible:
-            ansibleVars:
-              edpm_container_registry_logins:
-                registry.redhat.io:
-                  jslagle@redhat.com: "{{ registry_redhat_io_password }}"

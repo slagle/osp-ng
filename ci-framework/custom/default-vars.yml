@@ -100,3 +100,14 @@ cifmw_test_operator_tobiko_image_tag: "{{ cifmw_update_containers_tag }}"
 # ntp
 # controller-0
 cifmw_ntp_server: clock.redhat.com
+
+cifmw_architecture_user_kustomize_99_registry_login:
+  edpm-pre-ceph-nodeset:
+    edpm-nodeset-values:
+      data:
+        nodeset:
+          ansible:
+            ansibleVars:
+              edpm_container_registry_logins:
+                registry.redhat.io:
+                  jslagle@redhat.com: "{{ registry_redhat_io_password }}"
