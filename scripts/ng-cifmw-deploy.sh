@@ -31,10 +31,13 @@ else
   DOWNSTREAM_ARGS=""
 fi
 
+cp ${NG_DIR}/ci-framework/custom/inventory.yml custom/inventory.yml
+sed -i "s/HOST/$(hostname)" custom/inventory.yml
+
 rm -rf ~/ansible.log;
 ansible-playbook \
   reproducer.yml \
-  -i ${NG_DIR}/ci-framework/custom/inventory.yml \
+  -i custom/inventory.yml \
   -e @scenarios/reproducers/va-hci.yml \
   -e @scenarios/reproducers/networking-definition.yml \
   -e @${NG_DIR}/ci-framework/custom/default-vars.yml \
