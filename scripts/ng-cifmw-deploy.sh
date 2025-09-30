@@ -14,6 +14,10 @@ if [ -z "${RRIP}" ]; then
     exit 1
 fi
 
+if [ ! -d ${OPENSTACK_K8S_OPERATORS}/ci-framework ]; then
+    git clone https://github.com/openstack-k8s-operators/ci-framework ${CIFMW_DIR}
+fi
+
 pushd ${CIFMW_DIR}
 
 if [ ! -d "${HOME}/test-python" ]; then

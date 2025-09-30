@@ -7,6 +7,10 @@ export SCRIPTS_DIR=$(dirname $(realpath $0))
 export DEEPSCRUB=${DEEPSCRUB:-""}
 export CIFMW_DIR=${CIFMW_DIR:-"${OPENSTACK_K8S_OPERATORS}/ci-framework"}
 
+if [ ! -d ${OPENSTACK_K8S_OPERATORS}/ci-framework ]; then
+    git clone https://github.com/openstack-k8s-operators/ci-framework ${CIFMW_DIR}
+fi
+
 if [ "${DEEPSCRUB}" = "1" ]; then
     DEEPSCRUB_ARGS="--tags deepscrub"
     sudo rm -rf /home/zuul/ci-framework-data
