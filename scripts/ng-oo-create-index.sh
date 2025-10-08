@@ -3,13 +3,18 @@
 set -eux
 
 VERSION=${VERSION:-"18.0.2"}
-PULLSPECS=${PULLSPECS:-"https://download.engineering.redhat.com/rcm-guest/puddles/OpenStack/rhoso-18.0-CI-files/pullspecs-${VERSION}.txt"}
+PULLSPECS=${PULLSPECS:-""}
 BUNDLES="$(curl -k ${PULLSPECS} | grep operator-bundle)"
 
 REGISTRY=default-route-openshift-image-registry.apps-crc.testing
 # namespace must match a project name
 REGISTRY_NAMESPACE=openstack-operators
 INDEX_IMAGE=$REGISTRY/$REGISTRY_NAMESPACE/rhoso-operator-index:${VERSION}
+
+if [ -z "${PULLSPECS}" ]; then
+    echo "\$PULLSPECS must be set"
+    exit 1
+fi
 
 oc registry login --insecure=true
 

@@ -1,3 +1,0 @@
-export NG_RHEL=1
-export OPENSTACK_IMG=images.paas.redhat.com/podified-main-rhos-18-rhel-9/openstack-operator-index:trunk-patches-lates
-export EDPM_IMAGE_URL="https://download.hosts.prod.upshift.rdu2.redhat.com/released/rhel-9/RHEL-9/9.4.0/BaseOS/x86_64/images/rhel-guest-image-9.4-20240419.25.x86_64.qcow2"

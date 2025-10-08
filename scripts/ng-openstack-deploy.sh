@@ -16,7 +16,7 @@ if [ ! -d ${OPENSTACK_K8S_OPERATORS}/install_yamls ]; then
 fi
 
 if [ "${NG_RHEL}" = "1" ]; then
-    oc patch image.config.openshift.io/cluster --type='merge' -p '{"spec":{"registrySources":{"insecureRegistries":["*.redhat.com","registry-proxy.engineering.redhat.com"]}}}'
+    oc patch image.config.openshift.io/cluster --type='merge' -p '{"spec":{"registrySources":{"insecureRegistries":["*.redhat.com","'${REGISTRY_PROXY_REDHAT}'"]}}}'
 fi
 
 pushd ${OPENSTACK_K8S_OPERATORS}/install_yamls

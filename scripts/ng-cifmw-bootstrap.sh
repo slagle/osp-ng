@@ -15,7 +15,7 @@ pushd ${CIFMW_DIR}
 make setup_molecule
 source ${HOME}/test-python/bin/activate
 
-curl -o bootstrap-hypervisor.yml https://gitlab.cee.redhat.com/ci-framework/docs/-/raw/main/sources/files/bootstrap-hypervisor.yml
+curl -o bootstrap-hypervisor.yml https://${GITLAB_CEE}/ci-framework/docs/-/raw/main/sources/files/bootstrap-hypervisor.yml
 
 ansible-playbook -i custom/inventory.yml \
   -e ansible_user=root \

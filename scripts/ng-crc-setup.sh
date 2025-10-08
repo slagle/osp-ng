@@ -69,7 +69,7 @@ make crc_storage
 popd
 
 # Fix chrony clock source
-ng-crc-ssh.sh sed 's/pool.*/pool\ clock.redhat.com\ iburst/' /etc/chrony.conf
+ng-crc-ssh.sh sed -i "s/pool.*/pool\ ${DATAPLANE_NTP_SERVER}\ iburst/" /etc/chrony.conf
 
 echo "#############################################"
 echo "You probably want to run:"

@@ -2,6 +2,11 @@
 
 set -eux
 
-HOST=${1:-"${HOST:-"host05.beaker.tripleo.ral3.eng.rdu2.redhat.com"}"}
+HOST=${1:-"${HOST:-""}"}
+
+if [ -z "${HOST}" ]; then
+    echo "\$HOST must be set"
+    exit 1
+fi
 
 ssh -t root@${HOST} sudo -u stack tmux a
