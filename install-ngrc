@@ -2,7 +2,9 @@
 
 mkdir -p ${HOME}/bin
 ln -s "$(dirname $(realpath ${BASH_SOURCE}))"/ngrc ${HOME}/bin/ngrc
+ln -s "$(dirname $(realpath ${BASH_SOURCE}))"/../osp-ng-private/ngrc-private ${HOME}/bin/ngrc-private
 
 if ! grep ngrc ~/.bashrc; then
     echo "source ngrc" >> ~/.bashrc
+    echo "source ngrc-private" >> ~/.bashrc
 fi
