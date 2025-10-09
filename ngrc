@@ -1,5 +1,6 @@
 NGRC=${NGRC:-"$(realpath $BASH_SOURCE)"}
 export NG_DIR=$(realpath $(dirname ${NGRC}))
+export NG_PRIVATE_DIR=${NG_DIR}/../osp-ng-private
 export NG_SCRIPTS_DIR=${NG_DIR}/scripts
 export NG_RELEASE="FR2"
 export NG_RHEL=${NG_RHEL:-"0"}

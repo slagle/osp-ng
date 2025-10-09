@@ -30,7 +30,7 @@ fi
 source ${HOME}/test-python/bin/activate
 
 if [ "${DOWNSTREAM}" = "1" ]; then
-  DOWNSTREAM_ARGS="-e @${NG_DIR}/ci-framework/custom/downstream-vars.yml"
+  DOWNSTREAM_ARGS="-e @${NG_PRIVATE_DIR}/ci-framework/custom/downstream-vars.yml"
 else
   DOWNSTREAM_ARGS=""
 fi
@@ -44,7 +44,7 @@ ansible-playbook \
   -i custom/inventory.yml \
   -e @scenarios/reproducers/va-hci.yml \
   -e @scenarios/reproducers/networking-definition.yml \
-  -e @${NG_DIR}/ci-framework/custom/default-vars.yml \
+  -e @${NG_PRIVATE_DIR}/ci-framework/custom/default-vars.yml \
   ${DOWNSTREAM_ARGS} \
   -e @${NG_DIR}/ci-framework/custom/secrets.yml \
   -e cifmw_target_host=hypervisor-1 \
