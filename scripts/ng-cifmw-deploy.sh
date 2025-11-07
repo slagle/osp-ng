@@ -8,6 +8,7 @@ export FLUSH_CACHE=${FLUSH_CACHE:-"--flush-cache"}
 export RRIP=${RRIP:-""}
 export CIFMW_DIR=${CIFMW_DIR:-"${OPENSTACK_K8S_OPERATORS}/ci-framework"}
 export DOWNSTREAM=${DOWNSTREAM:-"1"}
+export DEPLOY_ARCHITECTURE=${DEPLOY_ARCHITECTURE:-"true"}
 
 if [ -z "${RRIP}" ]; then
     echo "\${RRIP} MUST BE SET TO redhat.registry.io PASSWORD!"
@@ -48,7 +49,7 @@ ansible-playbook \
   ${DOWNSTREAM_ARGS} \
   -e @${NG_DIR}/ci-framework/custom/secrets.yml \
   -e cifmw_target_host=hypervisor-1 \
-  -e cifmw_deploy_architecture=true \
+  -e cifmw_deploy_architecture=${DEPLOY_ARCHITECTURE} \
   -e cifmw_nolog=false \
   -e registry_redhat_io_password=${RRIP} \
   ${FLUSH_CACHE} \
