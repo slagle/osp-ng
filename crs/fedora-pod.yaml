@@ -1,0 +1,15 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: fedora
+  namespace: openstack
+spec:
+  securityContext:
+    allowPrivilegeEscalation: true
+  containers:
+    - command:
+      - sleep
+      - infinity
+      image: quay.io/fedora/fedora:latest
+      name: fedora
+

@@ -1,0 +1,7 @@
+- name: Libvirt layout
+  hosts: hypervisor-1
+  tasks:
+    - name: Consume libvirt_manager
+      ansible.builtin.include_role:
+        name: reproducer
+        tasks_from: libvirt_layout.yml

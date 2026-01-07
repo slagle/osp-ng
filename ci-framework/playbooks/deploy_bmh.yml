@@ -1,0 +1,32 @@
+- name: Create BaremetalHosts
+  hosts: controller-0
+  gather_facts: false
+  tasks:
+    - name: Check if baremetal_info is defined
+      set_fact:
+        baremetal_info_defined: "{{ baremetal_info is defined }}"
+    - name: Fetch baremetal info
+      fetch:
+        src: /home/zuul/ci-framework-data/parameters/baremetal-info.yml
+        dest: baremetal-info.yaml
+        flat: true
+      when:
+        - not baremetal_info_defined
+    - name: Include baremetal info vars
+      include_vars: baremetal-info.yaml
+      when:
+        - not baremetal_info_defined
+    - name: Include baremetal info vars from barmetal_info variables
+      include_vars: "{{ baremetal_info }}"
+      when:
+        - baremetal_info_defined
+    - name: Include deploy_bmh role
+      include_role:
+        name: deploy_bmh
+      vars:
+        cifmw_deploy_bmh_boot_interface: ocpbm
+        cifmw_deploy_bmh_apply_cr: "{{ apply_bmh|bool }}"
+        cifmw_openshift_kubeconfig: ~/.kube/config
+        cifmw_deploy_bmh_dest_dir: bmhs
+        ansible_user_dir: /home/zuul
+
