@@ -9,6 +9,7 @@ export RRIP=${RRIP:-""}
 export CIFMW_DIR=${CIFMW_DIR:-"${OPENSTACK_K8S_OPERATORS}/ci-framework"}
 export DOWNSTREAM=${DOWNSTREAM:-"1"}
 export DEPLOY_ARCHITECTURE=${DEPLOY_ARCHITECTURE:-"true"}
+export PLAYBOOK=${PLAYBOOK:-"reproducer.yml"}
 
 if [ -z "${RRIP}" ]; then
     echo "\${RRIP} MUST BE SET TO redhat.registry.io PASSWORD!"
@@ -41,7 +42,7 @@ sed -i "s/HOST/$(hostname)/" custom/inventory.yml
 
 rm -rf ~/ansible.log;
 ansible-playbook \
-  reproducer.yml \
+  ${PLAYBOOK} \
   -i custom/inventory.yml \
   -e @scenarios/reproducers/va-hci.yml \
   -e @scenarios/reproducers/networking-definition.yml \
@@ -54,5 +55,7 @@ ansible-playbook \
   -e registry_redhat_io_password=${RRIP} \
   ${FLUSH_CACHE} \
   $@
+  # -e cifmw_enable_virtual_baremetal_support=true \
+  # -e cifmw_sushy_emulator_hypervisor_target=hypervisor-1 \
 
 popd

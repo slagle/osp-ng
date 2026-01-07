@@ -11,7 +11,20 @@ fi
 
 pushd ${OPENSTACK_K8S_OPERATORS}/install_yamls
 
-make openstack_deploy_cleanup
-make openstack_cleanup
+# install_yamls approach
+# make openstack_deploy_cleanup
+# make openstack_cleanup
+
+oc project openstack
+oc delete oscps --all=true
+oc delete openstack --all=true
+oc delete osdpns --all=true
+oc delete osdpd --all=true
+oc delete osdps --all=true
+
+oc project openstack-operators
+oc delete subscription --all=true
+oc delete csv --all=true
+oc delete catalogsource --all=true
 
 popd

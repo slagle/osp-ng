@@ -44,3 +44,10 @@ function ngec {
     echo "osp-ng/install-ngrc"
     echo "source ngrc"
 }
+
+function ngpr {
+    if [ -n "${2}" ]; then
+        repo="--repo openstack-k8s-operators/${2}"
+    fi
+    gh pr view $1 --json title,url ${repo} | jq '"\(.title) \(.url)"' -r
+}
