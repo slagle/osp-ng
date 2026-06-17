@@ -21,7 +21,7 @@ function k9s {
     if [ ! -f ~/bin/k9s ]; then
         curl -k -L -o - https://github.com/derailed/k9s/releases/download/v0.32.5/k9s_Linux_amd64.tar.gz | tar -C ~/bin -f - -z -x k9s
     fi
-    K9S_CONFIG_DIR="${NG_DIR}/config/k9s" ~/bin/k9s
+    K9S_CONFIG_DIR="${NG_DIR}/config/k9s" ~/bin/k9s $@
 }
 
 function ng-pull {
